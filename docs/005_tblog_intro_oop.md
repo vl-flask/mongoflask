@@ -109,3 +109,14 @@ Create a python file for it outside the package.
 ```
 touch database.py
 ```
+Let's create a Database class.
+```python
+class Database(object):
+    URI = "mongodb://127.0.0.1:27017"
+    DATABASE = None
+```
+Normally, you provide an `__init__()` method, but not here.  
+* We'll use the same URI.
+* We'll user the same database.
+We wanna say this `Database` is a more overarching thing. It's rather a bluerprint.  
+But we dont need to initialize objects at all.
