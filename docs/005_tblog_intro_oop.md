@@ -118,5 +118,37 @@ class Database(object):
 Normally, you provide an `__init__()` method, but not here.  
 * We'll use the same URI.
 * We'll user the same database.
+These are static properties.  
 We wanna say this `Database` is a more overarching thing. It's rather a bluerprint.  
-But we dont need to initialize objects at all.
+But we dont need to initialize objects at all.  
+So we do this.
+```python
+class Database(object):
+    # [...]
+    # Tell Python we're not gonna use `self`
+    @staticmethod
+    def initialize():
+        client = pymongo.MongoClient(Database.URI)
+
+```
+Provide the insert method.
+```python
+class Database(object):
+    # [...]
+    @staticmethod
+    def insert(collection, data):
+        Database.DATABASE[collection].insert(data)
+```
+Add methods for returning data.
+```python
+class Database(object):
+    # [...]
+    @staticmethod
+    def find(collection, query):
+        return Database.DATABASE[collection].find(query)
+    @staticmethod
+    def find_one(collection, query):
+        return Database.DATABASE[collection].find_one(query)
+```
+NEXT UP:
+* [TBlog - Default Values - id and date](006_id_date.md)
